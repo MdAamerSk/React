@@ -4,14 +4,18 @@ import Contact from './components/Contact'
 import About from './components/About'
 
 const Web = () => {
-  return (
-    <div className='h-screen grid grid-cols-2 gap-4 bg-gray-200'>
-      <h1>Web Page</h1>
-      <Card />
-      <Contact />
-      <About />
-    </div>
-  )
+    let arr = [1, 3, 5, 6, 4, 2, 3, 8, 9, 5, 7, 8, 2, 3, 4, 5, 6, 7, 8, 9];
+    return (
+        <div className=' bg-gray-200'>
+            <h1>Web Page</h1>
+
+            {
+                arr.map((item,index) => {
+                    return <Card key={index} />
+                })
+            }
+        </div>
+    )
 }
 
 export default Web
