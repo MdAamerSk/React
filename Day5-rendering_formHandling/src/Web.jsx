@@ -6,38 +6,33 @@ import { useState } from 'react'
 
 const Web = () => {
 
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+   const [formData, setFormData] = useState({});
 
     return (
         <div className=" flex flex-col gap-5">
-            
+
             <input
                 className="border-2 border-black"
                 type="text"
                 placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
             />
             <input
                 className="border-2 border-black"
-                type="email"
+                type="text"
                 placeholder="Enter your email"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value) }}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
             />
             <input
                 className="border-2 border-black"
-                type="password"
+                type="text"
                 placeholder="Enter your password"
-                value={password}
-                onChange={(e) => { setPassword(e.target.value) }}
+                onChange={(e) => setFormData({...formData, password: e.target.value})}
             />
 
-            <h1 className="text-2xl font-bold">Hello, {name}</h1>
-            <h1 className="text-2xl font-bold">Your email is: {email}</h1>
-            <h1 className="text-2xl font-bold">Your password is: {password}</h1>
+            <h1 className="text-2xl font-bold">Hello, {formData.name}</h1>
+            <h1 className="text-2xl font-bold">Your email is: {formData.email}</h1>
+            <h1 className="text-2xl font-bold">Your password is: {formData.password}</h1>
 
         </div>
     )
