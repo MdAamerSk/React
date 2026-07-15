@@ -8,26 +8,34 @@ const Web = () => {
 
    const [formData, setFormData] = useState({});
 
+    const handleChange =(e) => {
+        let { name, value } = e.target;
+        setFormData({...formData, [name]: value})
+    };
+
     return (
         <div className=" flex flex-col gap-5">
 
             <input
                 className="border-2 border-black"
                 type="text"
+                name="name"
                 placeholder="Enter your name"
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                onChange={handleChange}
             />
             <input
                 className="border-2 border-black"
                 type="text"
+                name="email"
                 placeholder="Enter your email"
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                onChange={handleChange}
             />
             <input
                 className="border-2 border-black"
                 type="text"
+                name="password"
                 placeholder="Enter your password"
-                onChange={(e) => setFormData({...formData, password: e.target.value})}
+                onChange={handleChange}
             />
 
             <h1 className="text-2xl font-bold">Hello, {formData.name}</h1>
