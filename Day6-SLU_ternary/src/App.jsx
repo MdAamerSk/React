@@ -1,20 +1,23 @@
-import React from 'react'
-import Login from './components/Login'
-import Register from './components/Register'
-import {useState} from 'react'
-const App = () => {
+import React, { useState } from "react";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Usercard from "./components/Usercard";
 
-  const [toggle, setToggle] = React.useState()
+const App = () => {
+  const [toggle, setToggle] = useState(false);
+  const [users, setUsers] = useState([]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      {
-      (toggle)?
-      <Login setToggle={setToggle} />:
-      <Register setToggle={setToggle} />
-      }
-    </div>
-  )
-}
+    <div className="bg-gray-300 h-screen">
+      <Register setUsers={setUsers} setToggle={setToggle} />
 
-export default App
+      <div className="flex gap-4">
+        {users.map((elem) => (
+          <Usercard key={elem.email} user={elem} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default App;

@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Register = ({setToggle}) => {
+const Register = ({setToggle, setUsers}) => {
 
 const [formData, setFormData] = React.useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    image: ''
 })
 
-const [users, setUsers] = React.useState([])
 
 const handleChange = (e) => {
     const {name, value} = e.target
@@ -18,11 +18,12 @@ const handleChange = (e) => {
 const handleSubmit = (e) => {
     e.preventDefault()
     console.log(formData)
-    setUsers([...users, formData])
+    setUsers(prev => [...prev, formData])//set the users state in App.jsx with the new user data
     setFormData({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        image: ''
     })
 }
     return (
@@ -35,7 +36,7 @@ const handleSubmit = (e) => {
                 <input
                     required
                     type="text"
-                    value={formData.name}
+                    value={formData.name}//bind the value of the input to the state
                     placeholder="Username"
                     name="name"
                     onChange={handleChange}
@@ -44,7 +45,7 @@ const handleSubmit = (e) => {
                 <input
                     required
                     type="email"
-                    value={formData.email}
+                    value={formData.email}//bind the value of the input to the state
                     placeholder="Email"
                     name="email"
                     onChange={handleChange}
@@ -54,12 +55,23 @@ const handleSubmit = (e) => {
                 <input
                     required
                     type="password"
-                    value={formData.password}
+                    value={formData.password}//bind the value of the input to the state
                     placeholder="Password"
                     name="password"
                     onChange={handleChange} 
                     className="border border-gray-300 rounded-md p-2 mb-2"
                 />
+
+                <input
+                    required
+                    type="url"
+                    value={formData.image}//bind the value of the input to the state    
+                    placeholder="Profile Image URL"
+                    name="image"
+                    onChange={handleChange}
+                    className="border border-gray-300 rounded-md p-2 mb-2"
+               />
+
                 <button
                     type="submit"
                     className="bg-blue-500 text-white px-4 py-2 rounded-md"
