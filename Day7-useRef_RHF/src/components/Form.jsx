@@ -13,7 +13,7 @@ const Form = () => {
     e.preventDefault();
 
     let obj = {
-      pName: formRef.current.productName.value,
+      pName: formRef.current.productName.value, //productName is the name of the input field we are targeting, and formRef.current.productName is the reference to that input field. .value is used to get the value entered in that input field.
       price: formRef.current.price.value,
       category: formRef.current.category.value,
       image: formRef.current.image.value,

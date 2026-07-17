@@ -24,7 +24,7 @@ const RHF = () => {
         className="flex p-6 rounded bg-white flex-col gap-4"
       >
         <input
-          {...register("productName")}
+          {...register("productName")} // Registers the input field with the name "productName"
           className="p-2 border border-gray-400 rounded"
           type="text"
           placeholder="Product name"
