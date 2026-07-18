@@ -1,8 +1,8 @@
 import React from "react";
 
-const Usercard = ({ user, setToggle }) => {
+const Usercard = ({ user, setToggle, index, setEditIndex }) => {
   return (
-    <div className="p-4 border border-white bg-black rounded flex flex-col gap-2">
+    <div className="p-4 border border-white bg-black rounded flex flex-col gap-2 text-white">
       <div className="h-40 w-40">
         <img
           className="object-cover h-full w-full rounded-xl"
@@ -17,7 +17,10 @@ const Usercard = ({ user, setToggle }) => {
       </div>
       <div className="flex w-full justify-between gap-4">
         <button
-          onClick={() => setToggle((prev) => !prev)}
+          onClick={() => {
+            setEditIndex(index);
+            setToggle(false);
+          }}
           className="bg-yellow-700 text-white py-2 px-3 rounded"
         >
           Update

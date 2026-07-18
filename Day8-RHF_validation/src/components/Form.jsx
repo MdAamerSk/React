@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-const Form = ({ setUsers, setToggle }) => {
+const Form = ({ setUsers, setToggle, editIndex, setEditIndex, users }) => {
   let {
     register,
     handleSubmit,
@@ -9,19 +9,35 @@ const Form = ({ setUsers, setToggle }) => {
     formState: { errors },
   } = useForm({
     mode: "onChange",
-   
   });
+
+  useEffect(() => {
+    if (editIndex !== null) {
+      reset(users[editIndex]);
+    } else {
+      reset({ name: "", email: "", mobile: "", image: "" });
+    }
+  }, [editIndex, users, reset]);
 
   let formSubmit = (data) => {
     console.log(data);
-    setUsers((prev) => [...prev, data]);
+    if (editIndex !== null) {
+      setUsers((prev) =>
+        prev.map((elem, idx) => (idx === editIndex ? data : elem))
+      );
+      setEditIndex(null);
+    } else {
+      setUsers((prev) => [...prev, data]);
+    }
     reset();
     setToggle((prev) => !prev);
   };
 
   return (
     <div className="flex flex-col items-center gap-3 text-white" >
-      <h1 className="text-xl text-black font-bold">Create user</h1>
+      <h1 className="text-xl text-black font-bold">
+        {editIndex !== null ? "Update user" : "Create user"}
+      </h1>
       <form
         onSubmit={handleSubmit(formSubmit)}
         className="w-90 flex flex-col bg-black gap-3 p-4 rounded border-2 border-white "
@@ -81,7 +97,7 @@ const Form = ({ setUsers, setToggle }) => {
         />
         {errors.image && <p className="text-red-500">{errors.image.message}</p>}
         <button className="text-white bg-blue-700 p-2 rounded-xl cursor-pointer">
-          Add user
+          {editIndex !== null ? "Update user" : "Add user"}
         </button>
       </form>
     </div>
