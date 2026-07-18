@@ -8,6 +8,10 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
 
+  const deleteUser = (indexToDelete) => {
+    setUsers((prev) => prev.filter((_, index) => index !== indexToDelete));
+  };
+
   return (
     <div className="p-3 bg-blue-200 h-screen flex flex-col gap-4">
       <Navbar setToggle={setToggle} />
@@ -22,6 +26,7 @@ const App = () => {
                 index={index}
                 setToggle={setToggle}
                 setEditIndex={setEditIndex}
+                deleteUser={deleteUser}
               />
             );
           })}
