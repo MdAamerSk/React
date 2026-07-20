@@ -3,11 +3,12 @@ import './index.css'
 import App from './App.jsx'
 import TestComponents from './TestComponents.jsx'
 import { ContextProvider } from './context/MyContext.jsx'
+import { MyShop, MyShopContextProvider } from './context/MyWebsite.jsx'
 
 createRoot(document.getElementById('root')).render(
 
-  <ContextProvider>
-      <TestComponents />
-  </ContextProvider>
+  <MyShopContextProvider>
+    <App  />
+  </MyShopContextProvider>
  
 )
