@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import About from "./components/About"
 import Contact from "./components/Contact"
 import Home from "./components/Home"
@@ -6,18 +6,31 @@ import { ContextProvider, MyStore } from './context/MyContext'
 
 const App = () => {
 
-  let data = useContext(MyStore);
-  console.log(data);
-  console.log("app rendering..")
+   let [count,setCount] = useState(0);
+   let [toggle,setToggle] = useState(true);
+
+      useEffect(()=>{
+         console.log("app rendering..")
+      },[])
+
 
   return (
     <div>
-      <ContextProvider>
+      
+    <h1>Count is - {count}</h1>
+    <button onClick={()=>{setCount(count+1)}}>increment</button>
+    <br />
+    <button onClick={()=>setToggle(prev => !prev)}>Change Toggle State</button>
+
+      {/*<ContextProvider>
         <Home />
         <About />
-      </ContextProvider>
+      </ContextProvider> */ }
 
-      <Contact />
+        {
+          toggle ?  <Contact /> : <About/>
+        }
+     
     </div>
   )
 }
