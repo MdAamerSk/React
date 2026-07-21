@@ -3,34 +3,44 @@ import About from "./components/About"
 import Contact from "./components/Contact"
 import Home from "./components/Home"
 import { ContextProvider, MyStore } from './context/MyContext'
+import axios from 'axios'
 
 const App = () => {
 
-   let [count,setCount] = useState(0);
-   let [toggle,setToggle] = useState(true);
+  let [count, setCount] = useState(0);
+  let [toggle, setToggle] = useState(true);
+  const [apiData, setApiData] = useState(null);
+  console.log("apidata", apiData);
 
-      useEffect(()=>{
-         console.log("app rendering..")
-      },[])
+  let getData = async () => {
+    let res = await axios.get("https://fakestoreapi.com/products");
+
+    setApiData(res.data);
+  };
+
+useEffect(()=>{
+  getData();
+},[])
+
 
 
   return (
     <div>
-      
-    <h1>Count is - {count}</h1>
-    <button onClick={()=>{setCount(count+1)}}>increment</button>
-    <br />
-    <button onClick={()=>setToggle(prev => !prev)}>Change Toggle State</button>
+
+      <h1>Count is - {count}</h1>
+      <button onClick={() => { setCount(count + 1) }}>increment</button>
+      <br />
+      <button onClick={() => setToggle(prev => !prev)}>Change Toggle State</button>
 
       {/*<ContextProvider>
         <Home />
         <About />
       </ContextProvider> */ }
 
-        {
-          toggle ?  <Contact /> : <About/>
-        }
-     
+      {
+        toggle ? <Contact /> : <About />
+      }
+
     </div>
   )
 }
