@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star, ShoppingCart, Minus, Plus } from "lucide-react";
 import { MyStore } from "../context/MyContext";
 
 
-const ProductCard = ({ product}) => {
+const ProductCard = ({ product,isInCart}) => {
 
-let {setCartItems} = useContext(MyStore)
+let {setCartItems, incrementQuantity, decrementQuantity} = useContext(MyStore)
 
 const addToCart = ()=>{
     setCartItems(
-        (prev)=>[...prev,product]
+        (prev)=>[...prev, { ...product, quantity: 1 }]
     )
     alert("product added into cart")
 };
@@ -58,11 +58,33 @@ const addToCart = ()=>{
 
         
 
-          <button className="flex w-full  bg-black flex py-3 font-semi-bold items-center justify-center gap-2 rounded"
-          onClick={addToCart}
+          {isInCart ? (
+          <div className="flex h-12 w-full items-center justify-between rounded-xl border border-gray-200 bg-gray-50 p-1">
+            <button
+              onClick={() => decrementQuantity(product.id)}
+              className="flex h-10 w-10 items-center justify-center rounded-lg bg-white border border-gray-200 text-gray-700 shadow-sm transition hover:bg-gray-100 active:scale-95 cursor-pointer"
+            >
+              <Minus size={16} strokeWidth={2.5} />
+            </button>
+            <span className="text-lg font-bold text-gray-800 tabular-nums">
+              {isInCart.quantity}
+            </span>
+            <button
+              onClick={() => incrementQuantity(product.id)}
+              className="flex h-10 w-10 items-center justify-center rounded-lg bg-black text-white shadow-sm transition hover:bg-gray-800 active:scale-95 cursor-pointer"
+            >
+              <Plus size={16} strokeWidth={2.5} />
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={addToCart}
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-black font-semibold text-white transition hover:bg-gray-800 cursor-pointer"
           >
+            <ShoppingCart size={18} />
             Add to Cart
           </button>
+        )}
         
       </div>
     </div>

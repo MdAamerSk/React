@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Minus, Plus, Trash2 } from "lucide-react";
+import { MyStore } from "../context/MyContext";
 
 const CartCard = ({ product }) => {
+  const { incrementQuantity, decrementQuantity, setCartItems } = useContext(MyStore);
+
+  const handleRemove = () => {
+    setCartItems((prev) => prev.filter((item) => item.id !== product.id));
+  };
+
   return (
     <div className="flex flex-col gap-5 rounded-xl border border-gray-200 bg-white p-5 shadow-sm md:flex-row">
       {/* Product Image */}
@@ -36,23 +43,32 @@ const CartCard = ({ product }) => {
           </h3>
 
           {/* Quantity */}
-          <div className="flex items-center rounded-lg border  bg-black">
-            <button className="p-2 hover:bg-gray-100 ">
-              <Minus size={18} />
+          <div className="flex items-center rounded-xl border border-gray-200 bg-gray-50 p-1">
+            <button
+              onClick={() => decrementQuantity(product.id)}
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-white border border-gray-200 text-gray-700 shadow-sm transition hover:bg-gray-100 active:scale-95 cursor-pointer"
+            >
+              <Minus size={14} strokeWidth={2.5} />
             </button>
 
-            <span className="w-12 text-center font-semibold">
+            <span className="w-10 text-center font-bold text-gray-800 tabular-nums">
               {product.quantity}
             </span>
 
-            <button className="p-2 hover:bg-gray-100">
-              <Plus size={18} />
+            <button
+              onClick={() => incrementQuantity(product.id)}
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-black text-white shadow-sm transition hover:bg-gray-800 active:scale-95 cursor-pointer"
+            >
+              <Plus size={14} strokeWidth={2.5} />
             </button>
           </div>
 
           {/* Remove */}
-          <button className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white transition hover:bg-red-600">
-            <Trash2 size={18} />
+          <button
+            onClick={handleRemove}
+            className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-600 cursor-pointer active:scale-95"
+          >
+            <Trash2 size={16} />
             Remove
           </button>
         </div>

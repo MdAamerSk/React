@@ -29,30 +29,29 @@ let {isCartOpen,cartItems} = useContext(MyStore)
 
 
   return (
-    <div className='h-screen p-2 text-white flex flex-col gap-4'>
+    <div className='min-h-screen bg-gray-50 text-gray-900 flex flex-col gap-6 p-4 md:p-8 max-w-7xl mx-auto w-full'>
       <Navbar />
 
-    {
-      isCartOpen ?
-       <div className='grid grid-cols-4 gap-4'>
-        {
-          productsData.map((elem)=>{
-            return <ProductCards key={elem.id} product={elem} />})
-        }
-      </div>
-      :
-      <div className=''>
-       <CartScreen  />
-      </div>
- 
-    }
-
-     
-
-      
-
+      {isCartOpen ? (
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4'>
+          {productsData.map((elem) => {
+            let isInCart = cartItems.find((val) => val.id === elem.id);
+            return (
+              <ProductCards
+                key={elem.id}
+                product={elem}
+                isInCart={isInCart}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div className='mt-4'>
+          <CartScreen />
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
