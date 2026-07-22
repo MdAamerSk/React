@@ -8,7 +8,7 @@ const Navbar = () => {
         <div className='flex items-center gap-10 justify-between'>
           <NavLink to={"/"}>Home</NavLink>
           <NavLink to={"/about"}>About</NavLink>
-          <NavLink to={"/contact"}>Home</NavLink>
+          <NavLink to={"/contact"}>Contact</NavLink>
         </div>
         <button>Login</button>
       </nav>
