@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
+import { MyStore } from '../context/MyContext'
 
-const Navbar = ({setIsCartOpen}) => {
+const Navbar = () => {
 
+let {setIsCartOpen} = useContext(MyStore)
 
   return (
     <div className='bg-black flex justify-between p-4 rounded-lg '>
