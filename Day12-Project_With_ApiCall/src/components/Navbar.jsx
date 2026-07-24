@@ -13,7 +13,7 @@ const Navbar = () => {
         onClick={() => setIsCartOpen(true)}
       >
         <ShoppingBag className="text-yellow-400 h-6 w-6" />
-        <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">E-SHOP</span>
+        <span className="bg-linear-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">E-SHOP</span>
       </div>
       
       <div className='flex items-center gap-8 text-base font-medium'>
