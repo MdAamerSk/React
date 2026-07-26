@@ -1,13 +1,13 @@
-import React from 'react'
-import AppRoutes from './routes/AppRoutes'
+import React from "react";
+import { Route, Routes } from "react-router";
+import AppRoutes from "./routes/AppRoutes";
 
 const App = () => {
   return (
     <div>
-      <h1 className=''> hwllo</h1>
-      <AppRoutes/>
+      <AppRoutes />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
