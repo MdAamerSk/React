@@ -12,7 +12,7 @@ const RegisterPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm();
 
   let formSubmit = (data) => {

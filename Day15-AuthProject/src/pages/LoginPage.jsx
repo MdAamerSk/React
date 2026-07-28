@@ -5,7 +5,7 @@ import { Auth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  const { registeredUsers, loggedInUser, setLoggedInUser } = useContext(Auth);
+  const { registeredUsers, setLoggedInUser } = useContext(Auth);
 
   let navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const LoginPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm();
 
   let formSubmit = (data) => {
