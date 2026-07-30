@@ -5,6 +5,8 @@ import { Auth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
+  console.log("Login rendering...");
+  
   const { registeredUsers, setLoggedInUser } = useContext(Auth);
 
   let navigate = useNavigate();

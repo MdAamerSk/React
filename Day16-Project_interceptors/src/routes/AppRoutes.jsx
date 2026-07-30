@@ -8,12 +8,16 @@ import MainLayout from '../layouts/MainLayout';
 import { AuthProvider } from '../context/AuthContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PublicRoute from './PublicRoute';
 
 const AppRoutes = () => {
 
   let router = createBrowserRouter([
     {
-      path: "/",
+      path:"/",
+      element:<PublicRoute/>,
+      children:[{
+        path: "/",
       element: <AuthLayout />,
       children: [
         {
@@ -25,6 +29,7 @@ const AppRoutes = () => {
           element: <RegisterPage />
         }
       ]
+    }]
     },
     {
       path: "/main",
