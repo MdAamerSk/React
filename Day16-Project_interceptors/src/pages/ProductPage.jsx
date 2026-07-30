@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
-import axios from "axios"
+import { axiosInstance } from "../config/axiosinstance";
 
 const ProductPage = () => {
   const [productsData, setProductsData] = useState([]);
@@ -8,7 +8,7 @@ const ProductPage = () => {
 
   let getProductsData = async () => {
     try {
-      let res = await axios.get('https://fakestoreapi.com/products');
+      let res = await axiosInstance.get('/products');
       console.log("product api response->", res);
       setProductsData(res.data);
       setIsLoading(false);
