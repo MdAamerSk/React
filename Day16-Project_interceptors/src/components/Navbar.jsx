@@ -41,6 +41,16 @@ const Navbar = () => {
           </NavLink>
         </div>
       </div>
+       <button
+        onClick={() => {
+          localStorage.removeItem("loggedinUser");
+          toast.warn("user logged out");
+          setLoggedInUser(null);
+        }}
+        className="py-3 bg-red-600 text-white rounded cursor-pointer"
+      >
+        Logout
+      </button>
     </div>
   )
 }
