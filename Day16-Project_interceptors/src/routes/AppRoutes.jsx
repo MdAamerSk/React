@@ -5,6 +5,9 @@ import RegisterPage from '../pages/RegisterPage';
 import AuthLayout from '../layouts/AuthLayout';
 import ProtectedRoute from './ProtectedRoute';
 import MainLayout from '../layouts/MainLayout';
+import HomePage from "../pages/HomePage";
+import ProductPage from '../pages/ProductPage';
+import UsersPage from '../pages/UsersPage';
 import { AuthProvider } from '../context/AuthContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,7 +40,21 @@ const AppRoutes = () => {
       children: [
         {
           path: "",
-          element: <MainLayout />
+          element: <MainLayout />,
+          children:[
+            {
+              path:"",
+              element: <HomePage/>
+            },
+            {
+              path:"users",
+              element: <UsersPage/>
+            },
+            {
+              path:"products",
+              element: <ProductPage/>
+            }
+          ]
         }
       ]
     }
