@@ -1,14 +1,16 @@
 import React from 'react'
 
-const Home = React.memo(() => {
+const Home = ({ users }) => {
     console.log("home rendering...");
-  return (
-    <div>
-      <h1 className="text-3xl font-bold">
-        home this side..
-      </h1>
-    </div>
-  )
-})
+    return (
+        <div>
+            <h1 className="text-3xl font-bold">
+                home this side..
+            </h1>
+        </div>
+    )
+}
 
-export default Home
+export default React.memo(Home, (prevProps, nextProps) => {
+    return prevProps.users.id === nextProps.users.id;
+})
