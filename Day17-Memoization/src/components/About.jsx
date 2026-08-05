@@ -10,6 +10,4 @@ const About = ({ users }) => {
     );
 };
 
-export default React.memo(About, (prevProps, nextProps) => {
-    return prevProps.users.name === nextProps.users.name;
-});
+export default React.memo(About)

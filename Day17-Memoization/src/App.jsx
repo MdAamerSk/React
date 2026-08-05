@@ -1,7 +1,7 @@
 import React from 'react'
 import Home from './components/Home'
 import About from './components/About'
-import { useState } from 'react'
+import { useState,useCallback } from 'react'
 
 const App = () => {
 
@@ -9,6 +9,11 @@ const App = () => {
   const [users, setUsers] = useState({ name: "Aamer Bidri", id: 789 });
 
   console.log("app rendering...");
+
+   let greet = useCallback(() => {
+    console.log("good evening...");
+  }, [users]);
+
   return (
     <div>
       <h1 className="text-3xl font-bold">
@@ -21,12 +26,12 @@ const App = () => {
         increment
       </button>
       <h2>Name is {users.name}</h2>
-      <button onClick={() => setUsers({ ...users, name: "MD AAMER SHAIKH" })}>
+      <button onClick={() => setUsers({ ...users, name: "MD AAMER SHAIKH" })}> {/*hamesha naye object ka reference jata hai */}
         Change name{" "}
       </button>
 
-      <Home users={users} />
-      <About users={users} />
+      <Home greet={greet} />
+      <About greet={greet} />
     </div>
   )
 }
