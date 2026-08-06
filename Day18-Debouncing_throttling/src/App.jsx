@@ -7,6 +7,9 @@ const App = () => {
 const [searchData, setSearchData] = React.useState("");
 const [productsData, setProductsData] = React.useState([]);
 const [filteredData, setFilteredData] = React.useState([]);
+const [scrollY, setScrollY] = React.useState(null);
+
+let throttle = false;
 
 let getProducts =async () =>{
  try{
@@ -26,7 +29,6 @@ let filteredata = ()=>{
   setFilteredData(result);
 }
 
-
 //debouncing
 useEffect(()=>{
   if(!searchData) return; // if searchData is empty, we don't want to filter the data, so we return early
@@ -38,6 +40,24 @@ useEffect(()=>{
 
 }
 ,[searchData])
+
+//throttling
+useEffect(() => {
+    let handleScroll = () => {
+      if (throttle) return;
+      throttle = true;
+      console.log("scroll triggered...");
+      setScrollY(window.scrollY);
+
+      setTimeout(() => {
+        throttle = false;
+      }, 10000);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
 useEffect(()=>{
   getProducts();
