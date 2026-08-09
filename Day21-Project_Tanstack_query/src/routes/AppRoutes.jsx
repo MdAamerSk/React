@@ -1,22 +1,41 @@
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import AuthLayout from "../layouts/AuthLayout";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
-import MainLayout from "../layouts/MainLayout";
-import HomePage from "../pages/HomePage";
-import AboutPage from "../pages/AboutPage";
-import ShopPage from "../pages/ShopPage";
-import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+// import AuthLayout from "../layout/AuthLayout";
+// import LoginPage from "../pages/LoginPage";
+// import RegisterPage from "../pages/RegisterPage";
+// import MainLayout from "../layout/MainLayout";
+// import HomePage from "../pages/HomePage";
+// import { addUser } from "../features/authSlice";
+// import PublicProtected from "./protected/PublicProtected";
+// import MainProtected from "./protected/MainProtected";
+// import ShopPage from "../pages/ShopPage";
+// import AboutPage from "../pages/AboutPage";
+
+import { lazy } from "react";
+
+// Layouts
+const AuthLayout = lazy(() => import("../layouts/AuthLayout"));
+const MainLayout = lazy(() => import("../layouts/MainLayout"));
+
+// Pages
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const RegisterPage = lazy(() => import("../pages/RegisterPage"));
+const HomePage = lazy(() => import("../pages/HomePage"));
+const ShopPage = lazy(() => import("../pages/ShopPage"));
+const AboutPage = lazy(() => import("../pages/AboutPage"));
+
+const PublicProtected = lazy(() => import("./protected/PublicProtected"));
+
+const MainProtected = lazy(() => import("./protected/MainProtected"));
+
 import { addUser } from "../features/authSlice";
-import PublicProtected from "./protected/PublicProtected";
-import MainProtected from "./protected/MainProtected";
 
 const AppRoutes = () => {
   let dispatch = useDispatch();
 
-  const hydrateUser = () => {  // this is a hydration process that checks if there is a logged in user in localStorage and if so, it dispatches the addUser action to add the user to the redux store. This is done so that the user remains logged in even after a page refresh.
+  const hydrateUser = () => {
     console.log("hydration processed...");
     let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
@@ -66,13 +85,13 @@ const AppRoutes = () => {
               element: <HomePage />,
             },
             {
+              path: "shop",
+              element: <ShopPage />,
+            },
+            {
               path: "about",
               element: <AboutPage />,
             },
-            {
-              path: "shop",
-              element: <ShopPage />,
-            }
           ],
         },
       ],
