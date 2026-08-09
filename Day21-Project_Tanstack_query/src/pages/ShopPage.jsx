@@ -3,30 +3,20 @@ import ProductCard from "../components/ProductCard";
 import ProductCardSkeleton from "../components/ProductCardSkeleton";
 //import { useProduct, useProductApi } from "../hooks/productHooks";
 //import Filters from "../components/Filters";
-import { getProductsDataApi } from "../api/productApi";
+import { useProductApi } from "../hooks/productHooks";
 
 const ShopPage = () => {
- const [productsData, setProductsData] = useState([]);
- const [isLoading, setIsLoading] = useState(true);
 
-   const getData = async () => {
-    let data = await getProductsDataApi();
-    setProductsData(data);
-    setIsLoading(false);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
+    let {data,isPending,error} = useProductApi();
 
   return (
     <div className="min-h-screen bg-black p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {isLoading
+        {isPending
           ? Array.from({ length: 8 }).map((_, index) => (
               <ProductCardSkeleton key={index} />
             ))
-          : productsData?.map((product) => (
+          : data?.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
       </div>
