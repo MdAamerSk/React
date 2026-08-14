@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import { getAllProductApi } from "../api/productApis"
+import { getAllProductApi,getProductsCategories } from "../api/productApis"
+
+//tanstackQuery
 
 export const useAllProduct = () => {
     
@@ -16,3 +18,10 @@ console.log("proucts data", data)
         errors,
     }
 }
+
+export const useAllCategories = () => {
+  return useQuery({
+    queryKey: ["AllCategories"],
+    queryFn: getProductsCategories,
+  });
+};
